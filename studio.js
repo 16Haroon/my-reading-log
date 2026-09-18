@@ -1,19 +1,15 @@
-/* Personal editor. The live page is read-only unless this browser
-   holds a fine-grained GitHub token for this repo. The token never
-   goes into git. */
+/* Personal editor. Visitors see the shelf. This browser can
+   unlock the buttons after That’s me. */
 
-const TOKEN_KEY = "my-reading-log.token";
+const GATE_KEY = "my-reading-log.gate";
+const PROGRESS_KEY = "my-reading-log.progress";
+const PASS_SHA = "27f9d8e9dbfdc2bf3806229730fb826e898fcc07f54b554d8553539f8c81f7c9";
 
 let progress = { status: { "48-laws": "reading" } };
-let progressSha = null;
 let dockTimer = 0;
 
-function token() {
-  return localStorage.getItem(TOKEN_KEY) || "";
-}
-
 function isOwner() {
-  return Boolean(token());
+  return localStorage.getItem(GATE_KEY) === "ok";
 }
 
 function setNote(text) {
@@ -32,16 +28,17 @@ function setNote(text) {
   }, 2800);
 }
 
-function api(path, options) {
-  const headers = Object.assign({
-    Accept: "application/vnd.github+json",
-    Authorization: "Bearer " + token()
-  }, (options && options.headers) || {});
-  return fetch("https://api.github.com" + path, Object.assign({}, options, { headers }));
+async function sha256Hex(text) {
+  const bytes = new TextEncoder().encode(text);
+  const buf = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(buf), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-function toBase64(text) {
-  return btoa(unescape(encodeURIComponent(text)));
+function sameHex(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 async function loadProgress() {
@@ -52,50 +49,24 @@ async function loadProgress() {
     // file:// or a missing copy — keep the default
   }
 
-  if (!token()) return;
+  if (!isOwner()) return;
   try {
-    const res = await api(
-      "/repos/" + SITE.githubUser + "/" + SITE.repo + "/contents/" + SITE.progressFile
-    );
-    if (!res.ok) return;
-    const file = await res.json();
-    progressSha = file.sha;
-    if (file.content) {
-      progress = JSON.parse(decodeURIComponent(escape(atob(file.content.replace(/\n/g, "")))));
-    }
+    const local = localStorage.getItem(PROGRESS_KEY);
+    if (local) progress = JSON.parse(local);
   } catch (err) {
-    setNote("Could not reach GitHub");
+    // ignore a broken local copy
   }
 }
 
-async function saveProgress() {
-  if (!token()) {
-    setNote("This browser is not signed in");
+function saveProgress() {
+  if (!isOwner()) {
+    setNote("That’s me first");
     return;
   }
   const body = snapshot(progress);
-  const content = toBase64(JSON.stringify(body, null, 2) + "\n");
-  const res = await api(
-    "/repos/" + SITE.githubUser + "/" + SITE.repo + "/contents/" + SITE.progressFile,
-    {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: "Update what I’m reading",
-        content: content,
-        sha: progressSha,
-        branch: SITE.branch
-      })
-    }
-  );
-  if (!res.ok) {
-    setNote("Save failed");
-    return;
-  }
-  const saved = await res.json();
-  progressSha = saved.content && saved.content.sha;
+  localStorage.setItem(PROGRESS_KEY, JSON.stringify(body));
   progress = body;
-  setNote("Saved");
+  setNote("Saved on this computer");
 }
 
 function applyStatus(id, value) {
@@ -123,7 +94,7 @@ function render() {
 
 function openGate() {
   document.getElementById("gate").classList.add("open");
-  document.getElementById("token-input").focus();
+  document.getElementById("password-input").focus();
 }
 
 function closeGate() {
@@ -131,15 +102,15 @@ function closeGate() {
 }
 
 async function unlock() {
-  const value = document.getElementById("token-input").value.trim();
+  const value = document.getElementById("password-input").value;
   if (!value) return;
-  localStorage.setItem(TOKEN_KEY, value);
-  const res = await api("/repos/" + SITE.githubUser + "/" + SITE.repo);
-  if (!res.ok) {
-    localStorage.removeItem(TOKEN_KEY);
-    setNote("Token was rejected");
+  const hex = await sha256Hex(value);
+  if (!sameHex(hex, PASS_SHA)) {
+    setNote("Not that");
     return;
   }
+  localStorage.setItem(GATE_KEY, "ok");
+  document.getElementById("password-input").value = "";
   closeGate();
   await loadProgress();
   render();
@@ -150,11 +121,16 @@ function bind() {
   document.getElementById("thats-me").addEventListener("click", openGate);
   document.getElementById("gate-cancel").addEventListener("click", closeGate);
   document.getElementById("gate-save").addEventListener("click", unlock);
+  document.getElementById("password-input").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") unlock();
+  });
   document.getElementById("save-btn").addEventListener("click", () => saveProgress());
   document.getElementById("sign-out").addEventListener("click", () => {
-    localStorage.removeItem(TOKEN_KEY);
-    render();
-    setNote("Signed out");
+    localStorage.removeItem(GATE_KEY);
+    loadProgress().then(() => {
+      render();
+      setNote("Signed out");
+    });
   });
 
   document.body.addEventListener("click", (event) => {
