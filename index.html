@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abdullah’s Reading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <svg class="stars" viewBox="0 0 100 100" preserveAspectRatio="none">
+      <circle cx="4" cy="8" r="0.18" fill="#f6efe4" opacity="0.9"/>
+      <circle cx="12" cy="18" r="0.12" fill="#e8c56b" opacity="0.7"/>
+      <circle cx="21" cy="6" r="0.15" fill="#f6efe4" opacity="0.55"/>
+      <circle cx="28" cy="22" r="0.1" fill="#d4c2e6" opacity="0.8"/>
+      <circle cx="37" cy="11" r="0.2" fill="#e8c56b" opacity="0.85"/>
+      <circle cx="46" cy="4" r="0.11" fill="#f6efe4" opacity="0.6"/>
+      <circle cx="55" cy="16" r="0.14" fill="#f6efe4" opacity="0.9"/>
+      <circle cx="63" cy="7" r="0.09" fill="#d4789c" opacity="0.55"/>
+      <circle cx="72" cy="13" r="0.16" fill="#e8c56b" opacity="0.75"/>
+      <circle cx="81" cy="5" r="0.12" fill="#f6efe4" opacity="0.8"/>
+      <circle cx="89" cy="19" r="0.18" fill="#f6efe4" opacity="0.7"/>
+      <circle cx="96" cy="9" r="0.1" fill="#e8c56b" opacity="0.65"/>
+      <circle cx="8" cy="32" r="0.11" fill="#d4c2e6" opacity="0.5"/>
+      <circle cx="17" cy="41" r="0.14" fill="#f6efe4" opacity="0.75"/>
+      <circle cx="33" cy="36" r="0.09" fill="#e8c56b" opacity="0.6"/>
+      <circle cx="42" cy="28" r="0.17" fill="#f6efe4" opacity="0.85"/>
+      <circle cx="58" cy="33" r="0.12" fill="#d4789c" opacity="0.45"/>
+      <circle cx="69" cy="27" r="0.1" fill="#f6efe4" opacity="0.7"/>
+      <circle cx="78" cy="38" r="0.15" fill="#e8c56b" opacity="0.8"/>
+      <circle cx="91" cy="31" r="0.11" fill="#f6efe4" opacity="0.55"/>
+      <circle cx="6" cy="52" r="0.13" fill="#f6efe4" opacity="0.4"/>
+      <circle cx="24" cy="58" r="0.1" fill="#d4c2e6" opacity="0.5"/>
+      <circle cx="39" cy="49" r="0.16" fill="#e8c56b" opacity="0.45"/>
+      <circle cx="51" cy="61" r="0.09" fill="#f6efe4" opacity="0.55"/>
+      <circle cx="67" cy="54" r="0.12" fill="#f6efe4" opacity="0.4"/>
+      <circle cx="84" cy="47" r="0.14" fill="#e8c56b" opacity="0.5"/>
+      <circle cx="93" cy="63" r="0.1" fill="#d4789c" opacity="0.35"/>
+    </svg>
+    <div class="horizon"></div>
+    <svg class="hills" viewBox="0 0 1440 180" preserveAspectRatio="none">
+      <path fill="#0a0412" opacity="0.55" d="M0 180V118c90-28 160-8 250-22 120-18 170 16 290-8 140-28 210 10 340-14 110-20 170 8 280-10 90-14 180 12 280-6v122z"/>
+      <path fill="#12071c" opacity="0.9" d="M0 180V142c120-18 210 6 340-12 150-20 200 14 330-6 140-22 190 8 310-10 110-16 200 10 280-4 90-12 140 8 180-2v72z"/>
+    </svg>
+    <div class="grain"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="bar">
+      <div class="bar-title">
+        <strong>Abdullah’s Reading</strong>
+        <span id="dock-line">One book at a time</span>
+      </div>
+      <div class="bar-actions">
+        <button type="button" class="btn" id="save-btn">Save</button>
+        <button type="button" class="btn-ghost" id="sign-out">Sign out</button>
+      </div>
+    </div>
+
+    <header class="mast">
+      <div class="kicker">A reading log</div>
+      <h1>What I’m reading</h1>
+      <p>One book at a time. The list is public. Editing is not.</p>
+      <div class="gold-rule"></div>
+    </header>
+
+    <section class="card" id="now"></section>
+    <section class="card" id="next"></section>
+
+    <section class="section">
+      <div class="section-title">Read</div>
+      <div id="read-list"></div>
+    </section>
+
+    <section class="section owner-only">
+      <div class="section-title">The rest of the shelf</div>
+      <div id="upcoming-list"></div>
+    </section>
+
+    <footer class="site-foot">
+      <button type="button" id="thats-me">That’s me</button>
+    </footer>
+  </div>
+
+  <div class="dialog-back" id="gate">
+    <div class="dialog">
+      <h3>Studio</h3>
+      <p>Paste a fine-grained GitHub token that can write this repo. It stays in this browser.</p>
+      <input id="token-input" type="password" autocomplete="off" placeholder="github_pat_…" />
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" id="gate-cancel">Cancel</button>
+        <button type="button" class="btn" id="gate-save">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="shelf.js"></script>
+  <script src="studio.js"></script>
+</body>
+</html>

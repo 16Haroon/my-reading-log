@@ -1,0 +1,395 @@
+/* Twilight palette. I wanted a night sky, not a template. */
+
+:root {
+  --dusk: #12071c;
+  --plum: #2a1342;
+  --lilac: #d4c2e6;
+  --rose: #d4789c;
+  --gold: #e8c56b;
+  --gold-soft: #c9a44a;
+  --cream: #f6efe4;
+  --muted: #b9a6c8;
+  --line: rgba(232, 197, 107, 0.28);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  min-height: 100%;
+  background: var(--dusk);
+  color: var(--cream);
+  font-family: Outfit, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+body { overflow-x: hidden; }
+
+.sky {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 78% 6%, rgba(212, 120, 156, 0.22), transparent 58%),
+    radial-gradient(700px 480px at 8% 18%, rgba(90, 40, 130, 0.45), transparent 55%),
+    radial-gradient(1200px 500px at 50% 108%, rgba(232, 197, 107, 0.12), transparent 55%),
+    linear-gradient(180deg, #1a0a2c 0%, #12071c 42%, #0d0614 100%);
+}
+
+.sky svg.stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sky .horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 28vh;
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 120%, rgba(232, 197, 107, 0.18), transparent 70%),
+    linear-gradient(180deg, transparent, rgba(8, 3, 14, 0.85));
+}
+
+.sky .hills {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 18vh;
+  min-height: 120px;
+}
+
+.sky .grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: min(840px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 96px;
+}
+
+.bar {
+  position: sticky;
+  top: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 8px 8px 22px;
+  margin-bottom: 36px;
+  background: rgba(18, 7, 28, 0.18);
+  border: 1px solid rgba(232, 197, 107, 0.32);
+  border-radius: 999px;
+}
+
+.bar-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.bar-title strong {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.bar-title span {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+body.is-owner .bar-actions { display: flex; }
+
+.btn {
+  appearance: none;
+  border: 1px solid rgba(246, 239, 228, 0.18);
+  background: var(--gold);
+  color: var(--dusk);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.btn:hover { background: var(--cream); border-color: transparent; }
+
+.btn-ghost {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 999px;
+}
+
+.btn-ghost:hover { color: var(--cream); }
+
+.mast {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+h1 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(48px, 9vw, 86px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+
+.mast p {
+  margin-top: 18px;
+  color: var(--lilac);
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.gold-rule {
+  width: 72px;
+  height: 1px;
+  background: var(--gold);
+  margin: 22px auto 0;
+  opacity: 0.85;
+}
+
+.card {
+  background: rgba(42, 19, 66, 0.55);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 28px 28px 24px;
+  margin-bottom: 22px;
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.by {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.section {
+  margin-top: 48px;
+}
+
+.section-title {
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.book-row {
+  padding: 14px 4px;
+  border-top: 1px solid rgba(181, 122, 212, 0.18);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.book-row:last-child {
+  border-bottom: 1px solid rgba(181, 122, 212, 0.18);
+}
+
+.book-row em {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  font-weight: 500;
+  display: block;
+  line-height: 1.2;
+}
+
+.book-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 300;
+  margin-top: 2px;
+}
+
+.pill {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+  align-self: center;
+}
+
+.owner-only { display: none; }
+body.is-owner .owner-only { display: block; }
+
+.row-actions {
+  display: none;
+  gap: 6px;
+}
+
+body.is-owner .row-actions { display: flex; }
+
+.row-actions button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--cream);
+  font-family: inherit;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  cursor: pointer;
+  border-radius: 999px;
+}
+
+.row-actions button:hover,
+.row-actions button.on {
+  background: var(--gold);
+  color: var(--dusk);
+  border-color: var(--gold);
+}
+
+.site-foot {
+  margin-top: 64px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.site-foot button {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.site-foot button:hover { color: var(--gold); }
+
+.dialog-back {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(8, 3, 14, 0.62);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.dialog-back.open { display: flex; }
+
+.dialog {
+  width: min(420px, 100%);
+  background: #1c0c2c;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.dialog h3 {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.dialog p {
+  color: var(--lilac);
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
+.dialog input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(18, 7, 28, 0.6);
+  color: var(--cream);
+  font: inherit;
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 640px) {
+  .wrap { width: min(840px, calc(100% - 28px)); }
+  .bar { flex-wrap: wrap; border-radius: 24px; }
+  .book-row { grid-template-columns: 1fr; }
+}
