@@ -1,6 +1,6 @@
 # Abdullah’s reading log
 
-**https://16haroon.github.io/my-reading-log/**
+[Open the page](https://16haroon.github.io/my-reading-log/)
 
 A small public page for what I’m reading, what I finished, and what’s next.
 
