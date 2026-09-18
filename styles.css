@@ -279,7 +279,60 @@ h1 {
 
 .cat[open] summary { color: var(--cream); }
 
-.cat .book-row:last-child { border-bottom: 0; }
+.cat-body {
+  padding: 4px 0 18px;
+}
+
+.read-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(181, 122, 212, 0.22);
+  background: rgba(18, 7, 28, 0.5);
+}
+
+.read-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.read-table thead th {
+  text-align: left;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  padding: 12px 16px 10px;
+  background: rgba(232, 197, 107, 0.08);
+}
+
+.read-table tbody td {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(181, 122, 212, 0.12);
+  vertical-align: top;
+}
+
+.read-table tbody tr:first-child td { border-top: 0; }
+
+.read-table td:first-child {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.25;
+}
+
+.read-table td:last-child {
+  color: var(--muted);
+  font-weight: 300;
+  font-size: 14px;
+  width: 38%;
+}
+
+.read-table tbody tr:hover td {
+  background: rgba(232, 197, 107, 0.07);
+}
 
 .book-row {
   padding: 14px 4px;

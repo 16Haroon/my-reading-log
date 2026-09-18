@@ -200,7 +200,13 @@ function renderShelf(progress, owner) {
     return (
       '<details class="cat">' +
         "<summary>" + esc(cat.label) + "<span>" + books.length + "</span></summary>" +
-        books.map((book) => bookRow(book)).join("") +
+        '<div class="cat-body"><div class="read-wrap"><table class="read-table">' +
+          "<thead><tr><th>Title</th><th>Author</th></tr></thead>" +
+          "<tbody>" +
+          books.map((book) =>
+            "<tr><td>" + esc(book.title) + "</td><td>" + esc(book.author) + "</td></tr>"
+          ).join("") +
+          "</tbody></table></div></div>" +
       "</details>"
     );
   }).join("");
