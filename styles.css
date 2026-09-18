@@ -203,7 +203,7 @@ h1 {
 }
 
 .card {
-  background: rgba(42, 19, 66, 0.55);
+  background: rgba(42, 19, 66, 0.78);
   border: 1px solid var(--line);
   border-radius: 28px;
   padding: 28px 28px 24px;
@@ -224,6 +224,7 @@ h1 {
   font-weight: 500;
   font-style: italic;
   line-height: 1.15;
+  color: var(--cream);
 }
 
 .by {
@@ -265,6 +266,7 @@ h1 {
   font-weight: 500;
   display: block;
   line-height: 1.2;
+  color: var(--cream);
 }
 
 .book-row small {
