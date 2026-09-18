@@ -1,9 +1,5 @@
 # Abdullah’s reading log
 
-[Open the page](https://16haroon.github.io/my-reading-log/)
+Open `index.html` in this folder. That’s the page — the same HTML as before.
 
-A small public page for what I’m reading, what I finished, and what’s next.
-
-I built it as a static site on purpose: HTML, CSS, a little JS, no framework. The list lives in `progress.json`. The look is dusk and gold because I like that hour of the day more than a white dashboard.
-
-This is just the shelf.
+Double-click it, or drag it into Chrome / Safari.
