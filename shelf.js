@@ -64,7 +64,6 @@ const SHELF = [
 
   { id: "womans-hour", title: "The Woman’s Hour: The Great Fight to Win the Vote", author: "Elaine Weiss", prior: true, category: "history" },
 
-  { id: "pride-prejudice", title: "Pride and Prejudice", author: "Jane Austen", prior: true, category: "stories" },
   { id: "my-antonia", title: "My Ántonia", author: "Willa Cather", prior: true, category: "stories" },
   { id: "forty-rules-love", title: "The Forty Rules of Love", author: "Elif Shafak", prior: true, category: "stories" },
   { id: "nineteen-eighty-four", title: "Nineteen Eighty-Four", author: "George Orwell", prior: true, category: "stories" },
@@ -95,6 +94,7 @@ const SHELF = [
   { id: "bed-procrustes", title: "The Bed of Procrustes", author: "Nassim Nicholas Taleb" },
   { id: "antifragile", title: "Antifragile", author: "Nassim Nicholas Taleb" },
   { id: "skin-in-the-game", title: "Skin in the Game", author: "Nassim Nicholas Taleb" },
+  { id: "pride-prejudice", title: "Pride and Prejudice", author: "Jane Austen" },
   { id: "persuasion", title: "Persuasion", author: "Jane Austen" },
   { id: "moveable-feast", title: "A Moveable Feast", author: "Ernest Hemingway" }
 ];
